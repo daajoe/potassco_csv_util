@@ -1,0 +1,21 @@
+short_groups:
+  DisjunctiveScheduling: DS
+  GeneralizedSlitherlink: Slither
+  GraphColouring: Col
+  HanoiTower: Hanoi
+  IncrementalScheduling: IS
+  KnightTour: Knight
+  Labyrinth: Laby
+  MagicSquareSets: Magic
+  MazeGeneration: Maze
+  Numberlink: NL
+  PackingProblem: Pack
+  Solitaire: Sol
+  SokobanDecision: Soko
+csv_rows:
+  - time
+  - timeout
+  - memout
+  - clasp_choices
+  - conflicts
+  - models

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+folder=$(dirname $(realpath $0))
+file=$(realpath $1)
+
+if [ ! -e $file ] ; then
+    echo 'File does not exist. Exiting...'
+    exit 1
+fi
+
+for i in {DS,Slither,Col,IS,Hanoi,Knight,Laby,Magic,Maze,NL,Pack,Sol,Soko} ; do 
+    $folder/potassco_csv $file $i; 
+done;

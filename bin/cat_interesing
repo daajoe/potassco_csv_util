@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+folder=$(dirname $(realpath $0))
+csvgrep -c set -m $2 $1 | csvcut -C max,median,min,HL-1-0,clingo-0,HT-1-0,HS-1-0,HF-2-0,HF-4-0,HF-6-0,HF-8-0,HF-20-0,HI-2-0,HI-4-0,HI-6-0,HI-8-0,HI-20-0,HS--1-0,HL--1-0,HF-1-0| $folder/csvcolorlook
