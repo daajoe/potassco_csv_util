@@ -67,6 +67,12 @@ with open(filepath, 'rb') as csvfile:
     header0=filter(lambda x: x!='', header0)
     header1 = csv_data.next()
     header1[0]='set'
+    
+    for i in xrange(len(header0)):
+        for k,v in config['csv_header'].iteritems():
+            header0[i]=header0[i].replace(k,v)
+        header0[i]=header0[i].replace('-','_').replace(' ', '')
+        
     rows = dict()
     select_indices(rows,header1,csv_rows)
     res=dict()

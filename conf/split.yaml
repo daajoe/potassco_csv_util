@@ -19,3 +19,21 @@ csv_rows:
   - clasp_choices
   - conflicts
   - models
+csv_header:
+  backdoors-1/backdoors-: ""
+  clingo-1: D1
+  clingo-0: D0
+  "-n1": ""
+  horn-level: HL
+  horn-true: HT
+  horn-false: HF
+  horn-sign: HS
+  horn-factor: HF
+  choice-factor: CF
+  choice-init: CI
+  choice-false: CF
+  choice-true: CT
+  choice-level: CL
+  choice-sign: CS
+  horn-init: HI
+  "--": "-"
