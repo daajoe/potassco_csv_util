@@ -24,6 +24,7 @@ def padd_empty(L):
         else:
             L[i]=padd
 
+#TODO: next
 def select_values(d, L, values):
     ret = dict()
     for val in values:
@@ -87,7 +88,7 @@ with open(filepath, 'rb') as csvfile:
             except ValueError:
                 logging.error('No Value "%s". Ignoring line...' %line[0])
                 continue
-    
+
     for r in csv_rows:
         res[r][0].insert(0,'set')
         res[r][0].insert(1,'#')

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+folder=$(dirname $(realpath $0))
+cut=$(csvcut -n $1 | grep "_0"| awk -F ":" '{printf $1;}' | sed 's/  / /g' | sed 's/^ //'g | tr '[:blank:]' ,)
+#echo $cut
+csvgrep -c set -m $2 $1 | csvcut -C $cut",D0,max,median,min" | $folder/max.r #| $folder/highlight.py --max --min | $folder/csvcolorlook -S
+#,HL_1_0,HL_1_0,D0,HT_1_0,HS_1_0,HF_2_0,HF_4_0,HF_6_0,HF_8_0,HF_20_0,HI_2_0,HI_4_0,HI_6_0,HI_8_0,HI_20_0,HS_1_0,HL_1_0,HF_1_0 
