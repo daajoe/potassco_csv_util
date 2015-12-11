@@ -2,5 +2,27 @@
 folder=$(dirname $(realpath $0))
 cut=$(csvcut -n $1 | grep "_0"| awk -F ":" '{printf $1;}' | sed 's/  / /g' | sed 's/^ //'g | tr '[:blank:]' ,)
 #echo $cut
-csvgrep -c set -m $2 $1 | csvcut -C $cut",D0,max,median,min" | $folder/max.r #| $folder/highlight.py --max --min | $folder/csvcolorlook -S
+basename=$(basename $1 .csv)
+filename="${basename%_*}"
+backdoor_csv=$filename"_backdoorprct.csv"
+tmp1=$(mktemp)
+csvgrep -c set -m $2 $backdoor_csv | csvcut -C $cut",D0,max,median,min" | csvcut -c 1,2,4 | sed "1 s/^.*$/set,#,bd/" > $tmp1
+tmp2=$(mktemp)
+csvgrep -c set -m $2 $1 | csvcut -C $cut",D0,max,median,min"  > $tmp2
+res=$(mktemp)
+csvjoin -c 2 $tmp1 $tmp2 | csvcut -C "#,set" > $res
+#reorder
+lines=$(csvcut -n $res | awk -F ':' '{gsub(/ /, "", $1); printf $1","} ' | cut -d "," -f 2-)
+rm $tmp1 $tmp2
+#apply r script
+csvcut -c $lines"1" $res | $folder/max.r | $folder/highlight.py --max --min --skip-row-until=-2 | $folder/csvcolorlook -S
+
+#TODO
+rm $res
+#| $folder/highlight.py --max --min | $folder/csvcolorlook -S
+#| csvcut -c set,#,D0,HL_1_0,HL_1_1,HL_2_0
+#csvgrep -c set -m $2 $1 | csvcut -C $cut",D0,max,median,min" 
+
+
+#| $folder/max.r #| $folder/highlight.py --max --min | $folder/csvcolorlook -S
 #,HL_1_0,HL_1_0,D0,HT_1_0,HS_1_0,HF_2_0,HF_4_0,HF_6_0,HF_8_0,HF_20_0,HI_2_0,HI_4_0,HI_6_0,HI_8_0,HI_20_0,HS_1_0,HL_1_0,HF_1_0 

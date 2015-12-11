@@ -19,6 +19,7 @@ csv_rows:
   - clasp_choices
   - conflicts
   - models
+  - backdoorprct
 csv_header:
   backdoors-1/backdoors-: ""
   clingo-1: D1

@@ -15,6 +15,8 @@ parser.add_argument('--skip-line', metavar='skip_line', type=int, default=1,
                     help='#lines to skip (e.g., header)')
 parser.add_argument('--skip-row', metavar='skip_row', type=int, default=2,
                     help='#rows to skip (e.g., header)')
+parser.add_argument('--skip-row-until', metavar='skip_row_until', type=int, default=None,
+                    help='#rows to skip until')
 #parser.add_argument('filename', metavar='filename', type=str,
 #                    help='FILE')
 
@@ -40,8 +42,12 @@ def main():
     for i in xrange(args.skip_line):
         res.append(csv_data.next())
     for line in csv_data:
-        line[args.skip_row:]=map(float, line[args.skip_row:])
-        line[args.skip_row:]=get_highlighted(line[args.skip_row:],highlight)
+        if not args.skip_row_until:
+            l = len(line)
+        else:
+            l = args.skip_row_until
+        line[args.skip_row:l]=map(float, line[args.skip_row:l])
+        line[args.skip_row:l]=get_highlighted(line[args.skip_row:l],highlight)
         res.append(line)
     
     csv_out = csv.writer(sys.stdout, dialect='excel')
