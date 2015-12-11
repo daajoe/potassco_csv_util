@@ -49,7 +49,10 @@ def remove_chars(L,chars):
             L[i]=c
 
 def short_instance(groups,s):
-    group,_,s=s.split('/')
+    if len(s.split('/'))<3:
+        group,s=s.split('/')
+    else:
+        group,_,s=s.split('/')
     try:
         group=config['short_groups'][group]
     except KeyError:
